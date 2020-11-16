@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import { FormstackForm } from './routes/FormstackForm';
+import { Homepage } from './routes/Homepage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+      <Route path='/form'>
+          <FormstackForm scriptURL="VJwwdfigmmrukoKUsKJjgfxiLP3%2B7BUh%2BROfc9FZXM03rEp76Zi4XsK7km5VMhkx" />
+        </Route>
+        <Route path='/'>
+          <Homepage />
+        </Route>
+      </Switch>
+    </Router>
+    
   );
 }
 

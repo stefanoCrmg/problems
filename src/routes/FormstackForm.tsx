@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const useScript = (
   url: string,
@@ -9,7 +9,7 @@ const useScript = (
   const [formRendered, setFormRendered] = useState<boolean>(false)
 
   useEffect(() => {
-    document.addEventListener('FormstackForm_Rendered', () =>
+    window.addEventListener('FormstackForm_Rendered', () =>
       setFormRendered(true)
     )
 
@@ -27,8 +27,10 @@ const useScript = (
       if (renderPoint && renderPoint.current) {
         renderPoint.current.removeChild(script)
       }
+      const spurNode = document.getElementById('FF_JSAPI')?.remove()
+      const spurNode2 = document.getElementById('ff-ui-datepicker-div')?.remove()
 
-      document.removeEventListener('FormstackForm_Rendered', () =>
+      window.removeEventListener('FormstackForm_Rendered', () =>
         setFormRendered(false)
       )
     }
@@ -40,12 +42,22 @@ const useScript = (
 const FormstackForm: React.FunctionComponent<{ scriptURL: string }> = ({
   scriptURL,
 }) => {
+  const history = useHistory()
+  console.log(history)
   const node = useRef<HTMLDivElement>(null)
   const formRendered = useScript(
     `https://formstack-mycredimi.cs109.force.com/services/apexrest/VisualAntidote/FFNEngine/v1/?d=${scriptURL}`,
     'jsFastForms',
     node
   )
+
+  // useEffect(() => {
+  //   window.addEventListener('popstate', () => {
+  //     history.go(1)
+  //     window.location.reload()
+  //   })
+  // })
+
 
   return (
     <div>

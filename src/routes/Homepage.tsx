@@ -11,7 +11,7 @@ const Homepage: React.FunctionComponent = () => {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
-        <Link to='/form' className="App-link">Go to forms</Link>
+        <a href='/form' className="App-link">Go to forms</a>
       </header>
       
     </div>
